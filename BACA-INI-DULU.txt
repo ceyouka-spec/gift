@@ -1,0 +1,107 @@
+===================================================
+ PANDUAN — WEBSITE KADO ULTAH UNTUK BINTANG EKA
+===================================================
+
+Struktur folder:
+kado-bintang-eka/
+├── index.html          <- halaman utama, buka ini
+├── admin.html           <- panel admin buat lihat pesan balasannya
+├── css/style.css
+├── js/main.js           <- semua pengaturan penting ada di sini
+├── music/               <- taruh lagu di sini
+└── photos/               <- taruh foto di sini
+
+
+1) MUSIK (LAGU MULTO)
+----------------------
+Website ini TIDAK menyertakan file lagu apapun (hak cipta), jadi kamu
+perlu menambahkannya sendiri:
+  1. Siapkan file lagu Multo (format .mp3) yang kamu punya secara sah.
+  2. Ganti namanya jadi:  multo.mp3
+  3. Taruh di dalam folder:  music/multo.mp3
+Musik akan otomatis mulai diputar begitu dia menekan tombol
+"KETUK UNTUK MEMBUKA" di layar pembuka (browser memang mengharuskan
+ada sentuhan/klik dulu sebelum audio bisa main, jadi tombol itu sudah
+otomatis membuka website SEKALIGUS memutar lagunya).
+
+Ada tombol bulat kecil (♪) di pojok kanan atas kalau dia mau
+mematikan suara sewaktu-waktu.
+
+
+2) FOTO
+-------
+Siapkan 4 foto, ganti namanya, lalu taruh di folder photos/:
+  photos/1.jpg  -> foto besar di hero (kanan atas, sesuai referensi kamu)
+  photos/2.jpg  -> foto galeri kecil #1
+  photos/3.jpg  -> foto galeri kecil #2
+  photos/4.jpg  -> foto galeri kecil #3
+
+Kalau file belum ada, di posisi itu akan muncul tulisan kecil
+"letakkan foto di photos/..." — jadi kamu tahu belum lengkap.
+Format .jpg / .png / .webp semua bisa, tinggal ganti ekstensi
+di index.html kalau kamu pakai .png (cari tulisan "photos/1.jpg" dst).
+
+
+3) HARAPAN & UMUR OTOMATIS
+---------------------------
+Tanggal lahir (21 Desember 2006) sudah diatur di js/main.js baris
+paling atas (BIRTH_DATE). Umur di kartu "Selamat ulang tahun ke-..."
+dihitung otomatis dari tanggal itu, jadi tidak perlu diubah setiap
+tahun kalau kamu pakai ulang website ini nanti.
+
+Jumlah lilin di kue juga otomatis mengikuti umur tersebut.
+
+
+4) PANEL ADMIN (admin.html) — SUPAYA BISA DIBUKA DARI HP MANAPUN
+--------------------------------------------------------------
+Di halaman terakhir website, dia bisa menulis apakah dia memaafkanmu
+dan menuliskan harapannya. Tanpa pengaturan tambahan, pesan itu HANYA
+tersimpan di HP/browser tempat dia menulis — admin.html cuma kebaca
+kalau dibuka di HP yang sama. Supaya kamu bisa buka admin.html dari
+HP KAMU sendiri dan tetap melihat pesan yang dia tulis dari HP-nya,
+pilih SALAH SATU (atau dua-duanya) cara di bawah:
+
+  CARA A — Firebase (disarankan, admin.html langsung nyambung semua HP)
+  1. Buka https://console.firebase.google.com -> buat project baru,
+     nama bebas (misal "kado-bintang-eka").
+  2. Menu kiri: Build -> Firestore Database -> Create database ->
+     "Start in test mode" -> pilih lokasi -> Enable.
+  3. Menu kiri: Project settings (ikon gerigi) -> scroll ke "Your apps"
+     -> klik ikon </> (Web) -> kasih nama apa saja -> Register app.
+  4. Copy object "firebaseConfig = {...}" yang muncul.
+  5. Buka js/firebase-config.js, tempel isinya menggantikan object
+     FIREBASE_CONFIG yang kosong.
+  6. Selesai. Sekarang pesan yang dia tulis otomatis tersimpan di
+     cloud, dan admin.html di HP kamu akan menampilkan badge
+     "☁ tersambung ke cloud" beserta semua pesannya.
+  (Firestore test mode aktif ±30 hari lalu perlu diperpanjang / ganti
+   rules — detail rule contoh ada di dalam file js/firebase-config.js)
+
+  CARA B — EmailJS (pesan langsung masuk ke email kamu, gratis ±5 menit)
+  1. Daftar di https://www.emailjs.com
+  2. Buat "Email Service" (hubungkan ke Gmail kamu) -> catat Service ID
+  3. Buat "Email Template" berisi variabel {{forgive}}, {{message}},
+     {{time}} -> catat Template ID
+  4. Ambil "Public Key" dari halaman Account
+  5. Buka js/main.js, isi 3 baris di paling atas:
+     EMAILJS_PUBLIC_KEY, EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID
+
+Kalau dua-duanya dilewati dulu, tidak apa — website tetap berjalan
+normal, pesan hanya tersimpan lokal di HP dia saja.
+
+Kata sandi default panel admin: bintangeka
+(bisa diganti di admin.html, cari ADMIN_PASSWORD)
+
+
+5) CARA MEMBUKA / MEMBAGIKAN WEBSITE
+--------------------------------------
+- Untuk dites sendiri di laptop: klik dua kali index.html.
+- Supaya bisa dibuka DI HP DIA (bukan cuma di HP kamu), folder ini
+  perlu di-upload ke hosting gratis, misalnya:
+    a. Netlify Drop (netlify.com/drop) -> tinggal seret folder ini,
+       langsung dapat link, paling mudah.
+    b. GitHub Pages -> kalau kamu sudah familiar dengan GitHub.
+  Setelah online, tinggal kirim link-nya ke dia lewat chat.
+
+
+Selamat, semoga dia suka. 🤍
