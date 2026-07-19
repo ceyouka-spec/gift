@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untuk Bintang Eka</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===================== GERBANG MASUK / LOADER ===================== -->
+<div id="gate" class="gate">
+  <div class="gate-inner">
+    <svg class="gate-candle" width="60" height="90" viewBox="0 0 60 90" fill="none">
+      <rect x="24" y="30" width="12" height="55" rx="3" stroke="currentColor" stroke-width="1.5"/>
+      <path class="gate-flame" d="M30 4C30 4 20 16 20 24C20 29.5 24.5 34 30 34C35.5 34 40 29.5 40 24C40 16 30 4 30 4Z" fill="currentColor"/>
+    </svg>
+    <p class="gate-label">MEMPERSIAPKAN SESUATU UNTUKMU</p>
+    <div class="gate-bar"><span id="gateProgress"></span></div>
+    <button id="enterBtn" class="enter-btn" disabled>KETUK UNTUK MEMBUKA</button>
+  </div>
+</div>
+
+<!-- ===================== AUDIO ===================== -->
+<audio id="bgAudio" src="music/multo.mp3" loop preload="auto"></audio>
+<button id="muteBtn" class="mute-btn" aria-label="Nyala/mati musik">♪</button>
+<span id="pageCounter" class="page-counter">1 / 4</span>
+
+<!-- ===================== OVERLAY TRANSISI HALAMAN ===================== -->
+<div id="pageLoader" class="page-loader">
+  <span></span><span></span><span></span>
+</div>
+
+<main id="site" class="site">
+
+  <!-- ===================== HALAMAN 1: HERO + GALERI ===================== -->
+  <section class="page page-active" data-page="1">
+    <div class="hero">
+      <div class="hero-text">
+        <p class="eyebrow"><span class="dot"></span>SELAMAT ULANG TAHUN</p>
+        <h1 class="hero-title">BINTANG<br><span>EKA</span></h1>
+        <p class="hero-desc">Karena Bintang Eka percaya bahwa kerja keras, disiplin, dan pantang menyerah adalah kunci untuk menggapai impian.</p>
+      </div>
+      <div class="hero-photo">
+        <div class="hero-photo-glow"></div>
+        <img src="photos/1.jpg" alt="Bintang Eka" onerror="this.parentElement.classList.add('img-missing')">
+      </div>
+    </div>
+    <div class="gallery">
+      <div class="gallery-item"><img src="photos/2.jpg" alt="" onerror="this.parentElement.classList.add('img-missing')"></div>
+      <div class="gallery-item"><img src="photos/3.jpg" alt="" onerror="this.parentElement.classList.add('img-missing')"></div>
+      <div class="gallery-item"><img src="photos/4.jpg" alt="" onerror="this.parentElement.classList.add('img-missing')"></div>
+    </div>
+    <button class="next-btn" data-next>Lanjut ↓</button>
+  </section>
+
+  <!-- ===================== HALAMAN 2: SURAT / PERMINTAAN MAAF ===================== -->
+  <section class="page" data-page="2">
+    <p class="eyebrow center"><span class="dot"></span>SEPUCUK SURAT</p>
+    <div class="letter-card">
+      <p>Sebelum semuanya dimulai, ada satu hal yang ingin aku sampaikan lebih dulu.</p>
+      <p>Maaf, karena dulu setiap kali ada masalah di antara kita, aku bukannya cerita dan membicarakannya baik-baik, aku malah memilih menjauh. Aku pikir dengan menjauh, semuanya akan jadi lebih baik, buatku dan buat kamu, tanpa benar-benar memikirkan bagaimana perasaanmu saat itu. Padahal itu bukan cara yang adil untukmu.</p>
+      <p>Aku sadar itu bukan hal yang mudah untuk kamu hadapi, dan aku minta maaf untuk itu. Terima kasih sudah tetap ada sampai sejauh ini.</p>
+      <p class="letter-sign">— Ditulis oleh, Aku</p>
+    </div>
+    <button class="next-btn" data-next>Lanjut ↓</button>
+  </section>
+
+  <!-- ===================== HALAMAN 3: KUE & LILIN ===================== -->
+  <section class="page cake-section" data-page="3">
+    <p class="eyebrow center"><span class="dot"></span>SAATNYA TIUP LILIN</p>
+    <h2 class="section-title">Buat Satu Permohonan</h2>
+    <p class="cake-hint" id="cakeHint">Tiup layar / mic hp kamu, atau tekan &amp; tahan tombol di bawah.</p>
+
+    <div class="cake-wrap">
+      <svg id="cakeSvg" viewBox="0 0 320 260" class="cake-svg">
+        <ellipse cx="160" cy="240" rx="140" ry="10" fill="currentColor" opacity="0.15"/>
+        <rect x="50" y="170" width="220" height="60" rx="10" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M50 178 Q65 186 80 178 T110 178 T140 178 T170 178 T200 178 T230 178 T260 178" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+        <rect x="85" y="115" width="150" height="55" rx="9" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M85 122 Q100 130 115 122 T145 122 T175 122 T205 122 T235 122" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+        <g id="candles"></g>
+      </svg>
+      <div class="smoke-layer" id="smokeLayer"></div>
+    </div>
+
+    <button id="blowBtn" class="blow-btn">TEKAN &amp; TAHAN UNTUK MENIUP</button>
+
+    <div id="wishReveal" class="wish-reveal">
+      <p class="wish-age" id="wishAge"></p>
+      <p class="wish-title">Ini harapanku untukmu:</p>
+      <ul class="wish-list">
+        <li>Naik kelas dan lulus dengan nilai yang baik.</li>
+        <li>Makin rajin belajar dan nggak gampang menyerah.</li>
+        <li>Masa depan yang cerah, seterang yang kamu bayangkan selama ini.</li>
+        <li>Sehat selalu, bahagia, dan dikelilingi orang-orang baik.</li>
+        <li>Dan semoga semua mimpi-mimpimu, satu per satu, jadi kenyataan.</li>
+      </ul>
+      <button class="next-btn" data-next>Lanjut ↓</button>
+    </div>
+  </section>
+
+  <!-- ===================== HALAMAN 4: HALAMAN BELAKANG ===================== -->
+  <section class="page backpage" data-page="4">
+    <p class="eyebrow center"><span class="dot"></span>HALAMAN TERAKHIR</p>
+    <h2 class="section-title">Giliran Kamu</h2>
+    <p class="backpage-desc">Sebelum kamu menutup halaman ini, aku ingin dengar dari kamu juga.</p>
+
+    <form id="replyForm" class="reply-form">
+      <label class="reply-label">Apakah kamu memaafkanku?</label>
+      <div class="forgive-options">
+        <button type="button" class="forgive-btn" data-value="Iya, aku maafin">Iya, aku maafin</button>
+        <button type="button" class="forgive-btn" data-value="Masih butuh waktu">Masih butuh waktu</button>
+      </div>
+
+      <label class="reply-label" for="wishSelf">Tulis harapanmu, untuk dirimu sendiri dan untukku</label>
+      <textarea id="wishSelf" rows="5" placeholder="Tulis di sini..." required></textarea>
+
+      <button type="submit" class="submit-btn">Kirim</button>
+      <p id="replyStatus" class="reply-status"></p>
+    </form>
+    <footer class="site-footer">
+      <p>dibuat dengan sepenuh hati.</p>
+    </footer>
+  </section>
+
+</main>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
