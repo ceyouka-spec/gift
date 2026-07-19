@@ -1,7 +1,7 @@
 /* ============================================================
    KONFIGURASI — edit bagian ini sesuai kebutuhanmu
    ============================================================ */
-const BIRTH_DATE = { day: 21, month: 12, year: 2006 }; // ulang tahun Bintang Eka
+const BIRTH_DATE = { day: 21, month: 12, year: 2010 }; // ulang tahun Bintang Eka
 
 // Isi 3 baris di bawah ini SETELAH kamu buat akun gratis di https://www.emailjs.com
 // supaya pesan balasan dari halaman terakhir terkirim ke email kamu.
